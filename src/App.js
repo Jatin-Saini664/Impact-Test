@@ -1,24 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import Candidate from './Components/Candidate';
+import Shortlisted from './Components/Shortlisted';
+import Rejected from './Components/Rejected';
+import User from './Components/User';
+import { DataProvider } from './Context/DataProvider';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <DataProvider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Candidate/>} exact></Route>
+        <Route path="/:id" element={<User/>}></Route>
+        <Route path="/shortlisted" element={<Shortlisted/>}></Route>
+        <Route path="/rejected" element={<Rejected/>}></Route>
+      </Routes>
+    </Router>
+    </DataProvider>
   );
 }
 
